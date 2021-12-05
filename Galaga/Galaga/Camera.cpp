@@ -6,29 +6,37 @@ Camera* instance = nullptr;
 
 Camera::Camera()
 {
-  CONSOLE_CURSOR_INFO cursorInfo = { 0, };
-  cursorInfo.dwSize = 1; //Ä¿¼­ ±½±â (1 ~ 100)
-  cursorInfo.bVisible = FALSE; //Ä¿¼­ Visible TRUE(º¸ÀÓ) FALSE(¼û±è)
-  SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+  width = 50;
+  height = 50;
+  bufferCount = width * height;
+  Console::SetSize(height, width * 2);
+  Console::SetCursorInfo(1, false);
 
-  buffer = new WCHAR[(width + 1) * height];
+  buffer = new WCHAR[(width+1) * height];
   for (int i = 0; i < height; i++)
   {
-    for (int j = 0; j < width; j++)
+    for (int j = 0; j < width+1; j++)
     {
       buffer[i * (width+1) + j] = L'¡¡';
+      if (j == width)
+      {
+        buffer[i * (width+1)+j] = L'\n';
+      }
     }
-    buffer[i * (width+1) + width] = L'\n';
   }
 
-  buffer2 = new WCHAR[(width + 1) * height];
+  buffer2 = new WCHAR[(width+1) * height];
   for (int i = 0; i < height; i++)
   {
-    for (int j = 0; j < width; j++)
+    for (int j = 0; j < width+1; j++)
     {
       buffer2[i * (width + 1) + j] = L'¡¡';
+      if (j == width)
+      {
+        buffer2[i * (width+1) + j] = L'\n';
+      }
     }
-    buffer2[i * (width + 1) + width] = L'\n';
+    
   }
   currentBuffer = buffer;
   nextBuffer = buffer2;
@@ -36,6 +44,17 @@ Camera::Camera()
 
 Camera::~Camera()
 {
+  if (buffer)
+  {
+    delete[] buffer;
+    buffer = nullptr;
+  }
+
+  if (buffer2)
+  {
+    delete[] buffer2;
+    buffer2 = nullptr;
+  }
 }
 
 Camera* Camera::GetInstance()
@@ -65,19 +84,23 @@ void Camera::Clear()
 {
   for (int i = 0; i < instance->height; i++)
   {
-    for (int j = 0; j < instance->width; j++)
+    for (int j = 0; j < instance->width+1; j++)
     {
-      instance->nextBuffer[i * (instance->width+1) + j] = L'¡¡';
+      instance->currentBuffer[i * (instance->width+1) + j] = L'¡¡';
+      if (j == instance->width)
+      {
+        if (i == instance->height - 1)
+        {
+          instance->currentBuffer[i * (instance->width+1) + j] = L'\0';
+        }
+        else
+        {
+          instance->currentBuffer[i * (instance->width+1) + j] = L'\n';
+        }
+      }
     }
 
-    if (i == instance->height - 1)
-    {
-      instance->nextBuffer[i * (instance->width+1) + instance->width] = L'\0';
-    }
-    else
-    {
-      instance->nextBuffer[i * (instance->width+1) + instance->width] = L'\n';
-    }
+    
     
   }
 }
@@ -85,16 +108,8 @@ void Camera::Clear()
 void Camera::Render()
 {
   Camera::GetInstance();
-  instance->Swapchain();
-  COORD Cur;
-  Cur.X = 0;
-  Cur.Y = 0;
-  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
-  //wprintf_s(instance->currentBuffer);
-  DWORD writtenCount;
-  WriteConsoleW(GetStdHandle(STD_OUTPUT_HANDLE),
-    instance->currentBuffer, 1800, &writtenCount, NULL);
-  //Sleep(50);
+  Console::SetCursorPosition(0, 0);
+  Console::Write(instance->currentBuffer);
 }
 
 Vector2& Camera::GetPosition()
@@ -104,7 +119,7 @@ Vector2& Camera::GetPosition()
 
 WCHAR* Camera::GetBuffer()
 {
-  return nextBuffer;
+  return currentBuffer;
 }
 
 void Camera::Swapchain()

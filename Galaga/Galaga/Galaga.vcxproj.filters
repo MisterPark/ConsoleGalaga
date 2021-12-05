@@ -25,6 +25,15 @@
     <Filter Include="GameObject\Player">
       <UniqueIdentifier>{ac85cb59-9b50-4955-8fb6-7db4daf5f7a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Missile">
+      <UniqueIdentifier>{0a9f7fca-dad1-4979-9c06-289f0c3ef3e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Unit">
+      <UniqueIdentifier>{087c958b-e33a-4db9-8d2d-ade07d19db90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console">
+      <UniqueIdentifier>{8274fa3d-f3f5-4e1e-bb25-96114e76b35d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -70,6 +79,13 @@
       <Filter>Library</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Missile.cpp">
+      <Filter>GameObject\Missile</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="Console.cpp">
+      <Filter>Console</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -112,5 +128,12 @@
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Missile.h">
+      <Filter>GameObject\Missile</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="Console.h">
+      <Filter>Console</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

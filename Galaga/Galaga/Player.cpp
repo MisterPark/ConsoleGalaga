@@ -5,10 +5,11 @@
 
 Player::Player()
 {
-  shape.data = new WCHAR[1];
-  shape.data[0] = L'¡Ú';
-  shape.width = 1;
-  shape.height = 1;
+  //shape.data = new WCHAR[1];
+  //shape.data[0] = L'¡Ú';
+  //shape.width = 1;
+  //shape.height = 1;
+  shape.LoadShape(L"playerShape.txt");
   speed = 30.f;
 }
 
@@ -20,22 +21,47 @@ void Player::Update()
 {
   InputManager::GetInstance();
   float dt = Time::DeltaTime();
-  if (InputManager::GetKey(VK_LEFT))
+  Vector2 direction = Vector2::Zero;
+
+  if (InputManager::GetKey(VK_LEFT) && InputManager::GetKey(VK_UP))
   {
-    position += Vector2::Left * speed * dt;
+    direction = (Vector2::Left + Vector2::Up).Normalized();
   }
-  if (InputManager::GetKey(VK_RIGHT))
+  else if (InputManager::GetKey(VK_LEFT) && InputManager::GetKey(VK_DOWN))
   {
-    position += Vector2::Right * speed * dt;
+    direction = (Vector2::Left + Vector2::Down).Normalized();
   }
-  if (InputManager::GetKey(VK_UP))
+  else if (InputManager::GetKey(VK_RIGHT) && InputManager::GetKey(VK_UP))
   {
-    position += Vector2::Up * speed * dt;
+    direction = (Vector2::Right + Vector2::Up).Normalized();
   }
-  if (InputManager::GetKey(VK_DOWN))
+  else if (InputManager::GetKey(VK_RIGHT) && InputManager::GetKey(VK_DOWN))
   {
-    position += Vector2::Down * speed * dt;
+    direction = (Vector2::Right + Vector2::Down).Normalized();
   }
+  else if (InputManager::GetKey(VK_LEFT))
+  {
+    direction = Vector2::Left;
+  }
+  else if (InputManager::GetKey(VK_RIGHT))
+  {
+    direction = Vector2::Right;
+  }
+  else if (InputManager::GetKey(VK_UP))
+  {
+    direction = Vector2::Up;
+  }
+  else if (InputManager::GetKey(VK_DOWN))
+  {
+    direction = Vector2::Down;
+  }
+
+  if (InputManager::GetKey(VK_SPACE))
+  {
+
+  }
+
+  position += direction * speed * dt;
 }
 
 void Player::Initialize()

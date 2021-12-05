@@ -96,6 +96,7 @@ struct Vector2
   {
     this->x = rhs.x;
     this->y = rhs.y;
+    return *this;
   }
 
   float Length() const

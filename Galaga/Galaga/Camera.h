@@ -24,7 +24,8 @@ private:
   WCHAR* buffer2 = nullptr;
   WCHAR* currentBuffer = nullptr;
   WCHAR* nextBuffer = nullptr;
-  int width = 60;
-  int height = 30;
+  int width;
+  int height;
+  int bufferCount;
 };
 

@@ -5,7 +5,7 @@ public:
   Shape();
   ~Shape();
   
-  void LoadShape(const string& fileName);
+  void LoadShape(const wstring& fileName);
 
 public:
   int width;
