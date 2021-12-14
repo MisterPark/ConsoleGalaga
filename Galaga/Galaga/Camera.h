@@ -1,4 +1,6 @@
 #pragma once
+class GameObject;
+
 class Camera
 {
 private:
@@ -16,6 +18,7 @@ public:
   WCHAR* GetBuffer();
   int GetWidth() { return width; }
   int GetHeight() { return height; }
+  bool IsOutOfRange(GameObject* pos);
   void Swapchain();
 
 private:

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "Time.h"
+#include "Missile.h"
 
 Player::Player()
 {
@@ -10,7 +11,7 @@ Player::Player()
   //shape.width = 1;
   //shape.height = 1;
   shape.LoadShape(L"playerShape.txt");
-  speed = 30.f;
+  speed = 1.f;
 }
 
 Player::~Player()
@@ -25,19 +26,19 @@ void Player::Update()
 
   if (InputManager::GetKey(VK_LEFT) && InputManager::GetKey(VK_UP))
   {
-    direction = (Vector2::Left + Vector2::Up).Normalized();
+    direction = (Vector2::Left + Vector2::Up);
   }
   else if (InputManager::GetKey(VK_LEFT) && InputManager::GetKey(VK_DOWN))
   {
-    direction = (Vector2::Left + Vector2::Down).Normalized();
+    direction = (Vector2::Left + Vector2::Down);
   }
   else if (InputManager::GetKey(VK_RIGHT) && InputManager::GetKey(VK_UP))
   {
-    direction = (Vector2::Right + Vector2::Up).Normalized();
+    direction = (Vector2::Right + Vector2::Up);
   }
   else if (InputManager::GetKey(VK_RIGHT) && InputManager::GetKey(VK_DOWN))
   {
-    direction = (Vector2::Right + Vector2::Down).Normalized();
+    direction = (Vector2::Right + Vector2::Down);
   }
   else if (InputManager::GetKey(VK_LEFT))
   {
@@ -58,10 +59,12 @@ void Player::Update()
 
   if (InputManager::GetKey(VK_SPACE))
   {
-
+    Missile* missile = new Missile();
+    missile->SetPosition(position.x, position.y);
+    missile->SetDirection(Vector2::Up);
   }
 
-  position += direction * speed * dt;
+  position += direction * speed;// *dt;
 }
 
 void Player::Initialize()

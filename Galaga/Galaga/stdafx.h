@@ -10,5 +10,6 @@
 #include "Vector2.h"
 
 #include "Console.h"
+#include "Time.h"
 
 using namespace std;

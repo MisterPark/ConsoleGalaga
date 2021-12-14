@@ -122,6 +122,21 @@ WCHAR* Camera::GetBuffer()
   return currentBuffer;
 }
 
+
+bool Camera::IsOutOfRange(GameObject* obj)
+{
+  int x = obj->GetPosition().x;
+  int y = obj->GetPosition().y;
+  int w = obj->shape.width;
+  int h = obj->shape.height;
+
+  if (x+w < 0) return true;
+  if (y+h < 0) return true;
+  if (x > width) return true;
+  if (y > height) return true;
+  return false;
+}
+
 void Camera::Swapchain()
 {
   WCHAR* buf = currentBuffer;

@@ -1,7 +1,7 @@
 #pragma once
-#include "GameObject.h"
+#include "Unit.h"
 class Player :
-    public GameObject
+    public Unit
 {
 public:
   Player();
@@ -11,5 +11,7 @@ public:
 
   // GameObject을(를) 통해 상속됨
   virtual void Initialize() override;
+
+
 };
 

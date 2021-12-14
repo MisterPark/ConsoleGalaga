@@ -14,12 +14,12 @@ public:
   void Destroy();
   bool DestroyEnabled();
   Vector2& GetPosition();
+  void SetPosition(float x, float y);
 
 
 protected:
   bool destroyFlag = false;
   Vector2 position;
-  float speed = 1.f;
 public:
   Shape shape;
 };

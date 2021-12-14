@@ -58,6 +58,7 @@ void Shape::LoadShape(const wstring& fileName)
   fclose(fp);
 
   // parsing
+  int col = 0;
   int line = 1;
   for (int i = 0; i < bufCount; i++)
   {
@@ -70,6 +71,7 @@ void Shape::LoadShape(const wstring& fileName)
       line++;
     }
   }
+  width = width == 0 ? 1 : width;
   height = line;
 
   data = new WCHAR[width * height];

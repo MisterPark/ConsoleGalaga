@@ -36,10 +36,12 @@ void IScene::Update()
 {
   ObjectManager::GetInstance()->Awake();
   ObjectManager::GetInstance()->Update();
+  ObjectManager::GetInstance()->Release();
   Camera::Update();
   Camera::GetInstance()->Clear();
   ObjectManager::GetInstance()->Render();
   Time::GetInstance()->SkipFrame();
+  Sleep(1);
 }
 
 string& IScene::GetName()

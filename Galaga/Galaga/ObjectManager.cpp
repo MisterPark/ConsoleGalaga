@@ -55,15 +55,15 @@ void ObjectManager::Update()
 void ObjectManager::Release()
 {
   ObjectManager::GetInstance();
-  auto begin = instance->objects.begin();
-  auto end = instance->objects.end();
-  for (auto iter = begin; iter != end;)
+  auto& list = instance->objects;
+  auto iter = list.begin();
+  for (; iter != list.end();)
   {
     GameObject* obj = *iter;
     if (obj->DestroyEnabled())
     {
-      iter = instance->objects.erase(iter);
       delete obj;
+      iter = list.erase(iter);
     }
     else
     {

@@ -78,13 +78,17 @@
     <ClCompile Include="Vector2.cpp">
       <Filter>Library</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp" />
     <ClCompile Include="Missile.cpp">
       <Filter>GameObject\Missile</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Console.cpp">
       <Filter>Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>GameObject\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,13 +131,17 @@
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h" />
     <ClInclude Include="Missile.h">
       <Filter>GameObject\Missile</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h" />
     <ClInclude Include="Console.h">
       <Filter>Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>GameObject\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
